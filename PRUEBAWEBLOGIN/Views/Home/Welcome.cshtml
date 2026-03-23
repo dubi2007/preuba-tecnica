@@ -1,0 +1,22 @@
+@{
+    ViewData["Title"] = "Bienvenida";
+    ViewData["HeaderTitle"] = "Activación de cuenta";
+}
+
+<main class="login-wrapper d-flex justify-content-center align-items-center flex-grow-1">
+    <!-- Welcome Card -->
+    <app-card width="480px" shadow="shadow-sm" extra-classes="text-center" padding="d-flex flex-column align-items-center gap-4" style="padding: 2rem;">
+            <div class="welcome-icon text-danger bg-danger bg-opacity-10 rounded-circle" style="width: 80px; height: 80px; display: flex; justify-content: center; align-items: center;">
+                <i class="bi bi-rocket-takeoff fs-1"></i>
+            </div>
+
+            <h2 class="fw-bold fs-4 m-0">¡Bienvenida, July!</h2>
+
+            <div>
+                <p class="mb-1 text-muted small fw-semibold">Su cuenta en el aplicativo X está activada.</p>
+                <p class="m-0 text-muted small fw-semibold">Ya puede iniciar sesión.</p>
+            </div>
+
+            <a class="btn btn-primary w-100 py-2 mt-2" style="background-color: #0d6efd;" asp-controller="Account" asp-action="Login">Iniciar sesión</a>
+    </app-card>
+</main>

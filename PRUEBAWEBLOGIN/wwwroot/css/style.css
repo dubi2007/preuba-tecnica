@@ -1,0 +1,168 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Encabezado principal */
+.app-header {
+    background-color: #9e1c20;
+    height: 60px;
+}
+
+/* Barra roja del login */
+.login-header {
+    background-color: #a01e24;
+    height: 50px;
+    width: 100%;
+}
+
+/* Pie de página */
+.app-footer {
+    height: 60px;
+    background-color: #ffffff !important;
+    width: 100%;
+}
+
+/* Login y Welcome Wrapper - Fondo Machu Picchu */
+.login-wrapper {
+    min-height: calc(100vh - 110px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)), url('/imagenes/dibujo-machupicchu.png') no-repeat center center;
+    background-size: 100% 100%;
+    overflow: hidden;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Login Card Styling */
+.card {
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Tab buttons styling */
+.doc-type-btn {
+    font-weight: 600;
+    border-radius: 4px;
+    padding: 0.6rem 1rem;
+}
+
+.doc-type-btn.active {
+    background-color: #6c757d;
+    color: white;
+    border-color: #6c757d;
+}
+
+.doc-type-btn:not(.active) {
+    background-color: #e9ecef;
+    color: #495057;
+    border-color: #dee2e6;
+}
+
+.doc-type-btn:hover {
+    opacity: 0.9;
+}
+
+/* Input fields styling */
+.form-control-lg {
+    height: auto;
+    padding: 0.75rem;
+}
+
+.border-gray {
+    border-color: #dee2e6;
+    background-color: #ffffff;
+}
+
+/* Error state - red borders override gray */
+.border-danger.border-gray,
+.is-invalid.border-gray {
+    border-color: #dc3545 !important;
+}
+
+/* Red borders on input-group elements when error */
+.input-group:has(.is-invalid) .input-group-text {
+    border-color: #dc3545 !important;
+}
+
+.form-label {
+    color: #212529 !important;
+}
+
+/* Profile Page - Layout Simple */
+.profile-layout {
+    display: flex;
+    min-height: calc(100vh - 120px);
+}
+
+.sidebar {
+    width: 80px;
+    background-color: white;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+    gap: 2rem;
+}
+
+.sidebar-icon {
+    font-size: 1.5rem;
+    color: #555;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+}
+
+.sidebar-icon.active {
+    background-color: #ffeaea;
+    color: #9e1c20;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f5f7;
+    overflow-y: auto;
+    padding: 2rem;
+}
+
+/* Tabs */
+.nav-tabs .nav-link {
+    color: #6c757d;
+    font-weight: 600;
+    border: none;
+    border-bottom: 3px solid transparent;
+}
+
+.nav-tabs .nav-link.active {
+    color: #0d6efd;
+    background: none;
+    border-bottom: 3px solid #0d6efd;
+}
+
+/* Input Fields */
+.form-control[readonly], .form-control:disabled {
+    background-color: #f8f9fa;
+}
+
+.user-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #a0c4ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 2.5rem;
+}

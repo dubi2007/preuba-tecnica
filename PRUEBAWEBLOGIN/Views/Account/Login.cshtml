@@ -1,0 +1,138 @@
+@{
+    ViewData["Title"] = "Login";
+    ViewData["ShowSidebar"] = false;
+}
+
+<!-- Barra superior roja -->
+<div class="login-header"></div>
+
+<main class="login-wrapper flex-grow-1">
+    <div class="login-container">
+        <!-- Tarjeta de inicio de sesión -->
+        <app-card width="400px" shadow="shadow-lg" padding="p-4" bg-color="#ffffff">
+
+                <div class="d-flex mb-4 gap-2">
+                    <button type="button" class="btn btn-secondary flex-grow-1 doc-type-btn active" data-doc-type="DNI">DNI</button>
+                    <button type="button" class="btn btn-light flex-grow-1 doc-type-btn" data-doc-type="CE">CE</button>
+                </div>
+
+                <form asp-controller="Account" asp-action="Login" method="post">
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger py-2">@ViewBag.Error</div>
+                    }
+
+                    <div class="mb-3">
+                        <label class="form-label text-dark small fw-semibold">Usuario</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white @(ViewBag.UsernameError != null ? "border-danger" : "border-gray")"><i class="bi bi-person"></i></span>
+                            <input type="text" name="Username" class="form-control form-control-lg @(ViewBag.UsernameError != null ? "is-invalid border-danger" : "border-gray")" placeholder="Ingresar usuario" value="@ViewBag.UsernameValue" required>
+                        </div>
+                        @if (ViewBag.UsernameError != null)
+                        {
+                            <div class="text-danger small mt-1 d-flex align-items-center gap-1">
+                                <i class="bi bi-exclamation-circle-fill"></i> @ViewBag.UsernameError
+                            </div>
+                        }
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label text-dark small fw-semibold">Contraseña</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white @(ViewBag.PasswordError != null ? "border-danger" : "border-gray")"><i class="bi bi-lock"></i></span>
+                            <input type="password" name="Password" id="passwordInput" class="form-control form-control-lg border-end-0 @(ViewBag.PasswordError != null ? "is-invalid border-danger" : "border-gray")" placeholder="Ingresar contraseña" required>
+                            <span class="input-group-text bg-white @(ViewBag.PasswordError != null ? "border-danger" : "border-gray")" id="togglePasswordBtn" style="cursor: pointer;"><i class="bi bi-eye"></i></span>
+                        </div>
+                        @if (ViewBag.PasswordError != null)
+                        {
+                            <div class="text-danger small mt-1 d-flex align-items-center gap-1">
+                                <i class="bi bi-exclamation-circle-fill"></i> @ViewBag.PasswordError
+                            </div>
+                        }
+                    </div>
+
+                    <div class="mb-4 text-start">
+                        <a href="#" class="text-decoration-none text-primary small fw-semibold">¿Olvidó su contraseña?</a>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 py-2 btn-login fw-semibold">Ingresar</button>
+                </form>
+        </app-card>
+
+        <!-- Mensaje de soporte -->
+        <app-card width="400px" shadow="shadow-sm" padding="p-3" bg-color="#ffffff">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="bi bi-headset text-primary" style="font-size: 1.5rem;"></i>
+                    <span class="small text-dark">¿Necesita ayuda?, <a href="#" class="text-decoration-none text-primary fw-semibold">contacte con el área de soporte.</a></span>
+                </div>
+        </app-card>
+    </div>
+
+    @if (ViewBag.SessionExpired == true)
+    {
+        <div class="position-fixed" style="bottom: 80px; right: 20px; z-index: 1100;">
+            <div class="toast show align-items-center bg-white shadow-sm border-0" role="alert" aria-live="assertive" aria-atomic="true" style="border-left: 4px solid #0d6efd !important; border-radius: 4px; padding: 0.5rem; width: 420px; box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important; background-color: #f8faff !important;">
+                <div class="d-flex p-2">
+                    <div class="toast-body d-flex align-items-start gap-3 w-100 p-0">
+                        <i class="bi bi-info-circle-fill text-primary" style="font-size: 1.25rem; line-height: 1;"></i>
+                        <span class="small fw-semibold text-dark mb-0 flex-grow-1" style="line-height:1.4;">
+                            Su sesión ha expirado debido a inactividad. Por favor,<br>inicie sesión nuevamente.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</main>
+
+
+@section Scripts {
+    <script>
+        // Password toggle
+        document.getElementById('togglePasswordBtn').addEventListener('click', function() {
+            var pwInput = document.getElementById('passwordInput');
+            var icon = this.querySelector('i');
+            if (pwInput.type === 'password') {
+                pwInput.type = 'text';
+                icon.classList.replace('bi-eye', 'bi-eye-slash');
+            } else {
+                pwInput.type = 'password';
+                icon.classList.replace('bi-eye-slash', 'bi-eye');
+            }
+        });
+
+        // DNI / CE tab switching
+        document.querySelectorAll('.doc-type-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.doc-type-btn').forEach(function(b) {
+                    b.classList.remove('active');
+                    b.classList.replace('btn-secondary', 'btn-light');
+                });
+                this.classList.add('active');
+                this.classList.replace('btn-light', 'btn-secondary');
+
+                var docType = this.getAttribute('data-doc-type');
+                var form = document.querySelector('form');
+                var submitBtn = form.querySelector('button[type="submit"]');
+
+                if (docType === 'CE') {
+                    // CE mode: disable form (demo only supports DNI)
+                    form.querySelectorAll('input').forEach(function(input) {
+                        input.disabled = true;
+                    });
+                    submitBtn.disabled = true;
+                    submitBtn.classList.add('btn-secondary');
+                    submitBtn.classList.remove('btn-primary');
+                } else {
+                    // DNI mode: enable form
+                    form.querySelectorAll('input').forEach(function(input) {
+                        input.disabled = false;
+                    });
+                    submitBtn.disabled = false;
+                    submitBtn.classList.add('btn-primary');
+                    submitBtn.classList.remove('btn-secondary');
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,19 @@
+@{
+    ViewData["Title"] = "Cuenta bloqueada";
+}
+
+<main class="login-wrapper flex-grow-1">
+    <div class="login-container">
+        <app-card width="480px" shadow="shadow-sm" extra-classes="text-center" padding="d-flex flex-column align-items-center gap-4" style="padding: 2rem;">
+                <div class="welcome-icon text-primary bg-primary bg-opacity-10 rounded-circle" style="width: 80px; height: 80px; display: flex; justify-content: center; align-items: center;">
+                    <i class="bi bi-headset fs-1"></i>
+                </div>
+
+                <h4 class="fw-bold m-0 text-dark">Cuenta bloqueada <br/> temporalmemte</h4>
+
+                <p class="mb-0 small text-muted" style="line-height:1.6;">
+                    Has excedido el número máximo de intentos fallidos (5). Por seguridad, tu cuenta ha sido bloqueada durante 15 minutos. Intenta nuevamente más tarde.
+                </p>
+        </app-card>
+    </div>
+</main>
